@@ -1,5 +1,7 @@
 package Game;
 
+import userMenu.HomePage;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +15,12 @@ public class Game {
 
 
     Coordinates playerPosition;
+
+    String playerName= "Karim";
+    int score=0;
+
+
+
 
     private void displayLabyrinth(Labyrinth labyrinth, Coordinates playerPosition, String playerColor, String startColor, String endColor, String resetColor) {
         List<List<Node>> nodes = labyrinth.nodes;
@@ -41,7 +49,7 @@ public class Game {
         }
     }
 
-    private void clearConsole() {
+    public void clearConsole() {
         // Clear the console screen
         try {
             final String os = System.getProperty("os.name");
@@ -59,7 +67,7 @@ public class Game {
 
     private Coordinates getNextPosition(Scanner scanner, Coordinates currentPosition) {
         // Get player input
-        System.out.print("Move (W/A/S/D): ");
+        System.out.print("Move using (Z/Q/S/D): ");
         String input = scanner.nextLine();
 
         // Calculate the new position based on input
@@ -100,10 +108,23 @@ public class Game {
 
 
 
+    // Function to display player information
+    private void displayPlayerInfo(String playerName, int playerScore) {
+        System.out.println("===================================");
+        System.out.println("Player: " + playerName + " | Score: " + playerScore);
+        System.out.println("===================================");
+    }
+
+
     public void gameLoop(Labyrinth labyrinth) {
+
+        HomePage homePage=new HomePage();
 
 
         playerPosition=labyrinth.getStart();
+
+
+
         List<Coordinates> playerPath = new ArrayList<>();
         playerPath.add(new Coordinates(playerPosition.getX(), playerPosition.getY()));
         Scanner scanner = new Scanner(System.in);
@@ -111,7 +132,11 @@ public class Game {
 
         while(true){
 
+
             clearConsole(); // Clear the console
+            homePage.displayLogo();
+
+            displayPlayerInfo(playerName, score);
 
             displayLabyrinth(labyrinth, playerPosition, BLUE_BACKGROUND, GREEN_BACKGROUND, YELLOW_BACKGROUND, RESET);
 
@@ -121,6 +146,7 @@ public class Game {
                 playerPosition.setX(newPosition.getX());
                 playerPosition.setY(newPosition.getY());
                 playerPath.add(new Coordinates(playerPosition.getX(), playerPosition.getY()));
+                score++;
 
                 // Check win condition
                 if (playerPosition.getX() == labyrinth.getEnd().getX() &&
@@ -135,6 +161,7 @@ public class Game {
                 System.out.println("Invalid move! Try again.");
             }
         }
+
 
         scanner.close();
 
