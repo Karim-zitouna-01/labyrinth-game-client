@@ -29,9 +29,6 @@ public class HomePage {
 
         System.out.println(blueColor+asciiArt+resetColor);
 
-
-
-
     }
 
 
@@ -67,7 +64,7 @@ public class HomePage {
         try {
             // Retrieve player details using the service
             //...
-            player=new Player(name);
+
             System.out.println("Sign-in successful! Welcome back, " + player.getName() + ".");
 
 
@@ -84,7 +81,7 @@ public class HomePage {
         try {
             // Retrieve player details using the service
             //...
-            player=new Player(name);
+
             System.out.println("Sign-in successful! Welcome back, " + player.getName() + ".");
 
 

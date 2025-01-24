@@ -16,8 +16,8 @@ public class Game {
 
     Coordinates playerPosition;
 
-    String playerName= "Karim";
-    int score=0;
+    //String playerName= "Karim";
+    //int score=0;
 
 
 
@@ -116,7 +116,7 @@ public class Game {
     }
 
 
-    public void gameLoop(Labyrinth labyrinth) {
+    public void gameLoop(Labyrinth labyrinth, Player player) {
 
         HomePage homePage=new HomePage();
 
@@ -136,7 +136,7 @@ public class Game {
             clearConsole(); // Clear the console
             homePage.displayLogo();
 
-            displayPlayerInfo(playerName, score);
+            displayPlayerInfo(player.getName(), player.getScore());
 
             displayLabyrinth(labyrinth, playerPosition, BLUE_BACKGROUND, GREEN_BACKGROUND, YELLOW_BACKGROUND, RESET);
 
@@ -146,7 +146,7 @@ public class Game {
                 playerPosition.setX(newPosition.getX());
                 playerPosition.setY(newPosition.getY());
                 playerPath.add(new Coordinates(playerPosition.getX(), playerPosition.getY()));
-                score++;
+                player.setScore(player.getScore()+1);
 
                 // Check win condition
                 if (playerPosition.getX() == labyrinth.getEnd().getX() &&
